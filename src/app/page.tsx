@@ -1,103 +1,163 @@
 import Image from "next/image";
+import Link from "next/link";
+import Navbar from "@/components/Navbar";
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <main className="min-h-screen">
+      <Navbar />
+      
+      {/* Hero Section */}
+      <section className="relative min-h-screen flex items-center">
+        <div className="absolute inset-0 bg-black/60 z-10"></div>
+        <div className="relative z-20 max-w-7xl mx-auto px-4 w-full">
+          <div className="flex flex-col md:flex-row items-center gap-8">
+            <div className="flex-1 relative h-[693px] w-full md:w-[680px] order-2 md:order-1">
+              <Image
+                src="/images/hero.png"
+                alt="Elegant woman wearing Persian gold jewelry"
+                fill
+                sizes="(max-width: 768px) 100vw, 680px"
+                className="object-contain"
+                priority
+              />
+            </div>
+            <div className="flex-1 text-left order-1 md:order-2">
+              <h1 className="text-4xl md:text-6xl font-bold mb-6 text-[#D4AF37]">
+                Persian Gold Excellence
+              </h1>
+              <p className="text-xl mb-8 text-gray-200 max-w-xl">
+                A legacy of Persian craftsmanship and artistry in Qatar
+              </p>
+              <Link href="/about" className="btn-primary">
+                Discover Our Story
+              </Link>
+            </div>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+      </section>
+
+      {/* Heritage Section */}
+      <section className="py-20 px-4">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="section-title text-center">Our Heritage</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
+            <div className="card group">
+              <div className="aspect-square relative mb-4 overflow-hidden rounded-lg">
+                <Image
+                  src="/images/craftman.jpeg"
+                  alt="Persian Craftsmanship"
+                  fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 25vw"
+                  className="object-cover transition-transform duration-300 group-hover:scale-105"
+                />
+              </div>
+              <h3 className="text-xl font-semibold text-[#D4AF37] mb-2">Persian Craftsmanship</h3>
+              <p className="text-gray-300">
+                Centuries of tradition and expertise in gold crafting
+              </p>
+            </div>
+            <div className="card group">
+              <div className="aspect-square relative mb-4 overflow-hidden rounded-lg">
+                <Image
+                  src="/images/quality.jpeg"
+                  alt="Quality Excellence"
+                  fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 25vw"
+                  className="object-cover transition-transform duration-300 group-hover:scale-105"
+                />
+              </div>
+              <h3 className="text-xl font-semibold text-[#D4AF37] mb-2">Quality Excellence</h3>
+              <p className="text-gray-300">
+                Only the finest materials and crafting techniques
+              </p>
+            </div>
+            <div className="card group">
+              <div className="aspect-square relative mb-4 overflow-hidden rounded-lg">
+                <Image
+                  src="/images/heritage.jpeg"
+                  alt="Cultural Heritage"
+                  fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 25vw"
+                  className="object-cover transition-transform duration-300 group-hover:scale-105"
+                />
+              </div>
+              <h3 className="text-xl font-semibold text-[#D4AF37] mb-2">Cultural Heritage</h3>
+              <p className="text-gray-300">
+                Blending Persian artistry with modern elegance
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* About Section */}
+      <section id="about" className="py-20 px-4 bg-black/40">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-12">
+          <div className="flex-1 relative h-[600px] w-full order-1 md:order-1">
+            <Image
+              src="/images/about.jpeg"
+              alt="About Persian Gold"
+              fill
+              sizes="(max-width: 768px) 100vw, 50vw"
+              className="object-cover rounded-lg"
+            />
+          </div>
+          <div className="flex-1 order-2 md:order-2">
+            <h2 className="section-title">Crafting Excellence Since 1990</h2>
+            <p className="text-gray-300 mb-6">
+              With over three decades of experience in gold crafting, 
+              Persian Gold Qatar brings you the finest expression of Persian 
+              artistry and craftsmanship. Our dedication to quality and 
+              tradition has made us a symbol of excellence in Qatar.
+            </p>
+            <Link href="/about" className="btn-primary inline-block">
+              Learn More
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Contact CTA Section */}
+      <section id="contact" className="py-20 px-4">
+        <div className="max-w-3xl mx-auto text-center">
+          <h2 className="section-title">Visit Our Showroom</h2>
+          <p className="text-gray-300 mb-8">
+            Experience the beauty and craftsmanship of Persian gold in person. 
+            Our experts are ready to guide you through our heritage.
+          </p>
+          <Link href="/contact" className="btn-primary">
+            Contact Us
+          </Link>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-black/80 border-t border-[#D4AF37]/20 py-12">
+        <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div>
+            <h3 className="text-[#D4AF37] font-bold text-xl mb-4">Persian Gold</h3>
+            <p className="text-gray-400">
+              Bringing Persian excellence and artistry to Qatar.
+            </p>
+          </div>
+          <div>
+            <h4 className="text-[#D4AF37] font-semibold mb-4">Contact</h4>
+            <ul className="space-y-2 text-gray-400">
+              <li>Pearl Qatar, Doha</li>
+              <li>Phone: +974 XXXX XXXX</li>
+              <li>Email: info@persiangold.qa</li>
+            </ul>
+          </div>
+          <div>
+            <h4 className="text-[#D4AF37] font-semibold mb-4">Business Hours</h4>
+            <ul className="space-y-2 text-gray-400">
+              <li>Mon - Sat: 10:00 - 22:00</li>
+              <li>Sunday: 14:00 - 20:00</li>
+            </ul>
+          </div>
+        </div>
       </footer>
-    </div>
+    </main>
   );
 }

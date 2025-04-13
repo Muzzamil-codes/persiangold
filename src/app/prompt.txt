@@ -1,0 +1,2 @@
+I have uploaded my images in public/images folder which contains hero.png, craftman.jpg, quality.jpg, heritage.jpg, about.jpg
+The hero.png is an image of a woman wearing jewellery with transperent background and dimensions 680X693 pixels, put it on the right side of the hero secction.
