@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
+import GoldPriceCard from "@/components/GoldPriceCard";
 
 export default function Home() {
   return (
@@ -8,30 +9,40 @@ export default function Home() {
       <Navbar />
       
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center">
+      <section className="relative h-screen flex items-center">
+        <div className="absolute inset-0">
+          <Image
+            src="/images/background.jpeg"
+            alt="Persian Gold Background"
+            fill
+            sizes="100vw"
+            className="object-cover"
+            priority
+          />
+        </div>
         <div className="absolute inset-0 bg-black/60 z-10"></div>
-        <div className="relative z-20 max-w-7xl mx-auto px-4 w-full">
-          <div className="flex flex-col md:flex-row items-center gap-8">
-            <div className="flex-1 relative h-[693px] w-full md:w-[680px] order-2 md:order-1">
-              <Image
-                src="/images/hero.png"
-                alt="Elegant woman wearing Persian gold jewelry"
-                fill
-                sizes="(max-width: 768px) 100vw, 680px"
-                className="object-contain"
-                priority
-              />
-            </div>
-            <div className="flex-1 text-left order-1 md:order-2">
-              <h1 className="text-4xl md:text-6xl font-bold mb-6 text-[#D4AF37]">
-                Persian Gold Excellence
-              </h1>
-              <p className="text-xl mb-8 text-gray-200 max-w-xl">
-                A legacy of Persian craftsmanship and artistry in Qatar
-              </p>
-              <Link href="/about" className="btn-primary">
-                Discover Our Story
-              </Link>
+        <div className="relative z-20 w-full h-full flex items-center">
+          <div className="max-w-7xl mx-auto px-4 w-full">
+            <div className="flex flex-col md:flex-row items-center gap-8">
+              <div className="hidden md:block flex-1 relative h-[850px] w-full md:w-[750px] order-2 md:order-1">
+                <Image
+                  src="/images/hero.png"
+                  alt="Elegant woman wearing Persian gold jewelry"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 750px"
+                  className="object-contain object-bottom"
+                  priority
+                />
+              </div>
+              <div className="flex-1 text-left order-1 md:order-2 md:self-center">
+                <h1 className="text-4xl md:text-6xl font-bold mb-6 text-[#D4AF37]">
+                  Persian Gold Excellence
+                </h1>
+                <p className="text-xl mb-8 text-gray-200 max-w-xl">
+                  A legacy of Persian craftsmanship and artistry in Qatar
+                </p>
+                <GoldPriceCard />
+              </div>
             </div>
           </div>
         </div>
