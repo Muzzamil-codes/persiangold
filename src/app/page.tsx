@@ -7,7 +7,7 @@ export default function Home() {
   return (
     <main className="min-h-screen">
       <Navbar />
-      
+
       {/* Hero Section */}
       <section className="relative h-screen flex items-center">
         <div className="absolute inset-0">
@@ -39,7 +39,7 @@ export default function Home() {
                   Persian Gold Excellence
                 </h1>
                 <p className="text-xl mb-8 text-gray-200 max-w-xl">
-                  A legacy of Persian craftsmanship and artistry in Qatar
+                  A legacy of Persian craftsmanship and artistry
                 </p>
                 <GoldPriceCard />
               </div>
@@ -115,12 +115,12 @@ export default function Home() {
             />
           </div>
           <div className="flex-1 order-2 md:order-2">
-            <h2 className="section-title">Crafting Excellence Since 1990</h2>
+            <h2 className="section-title">Crafting Excellence</h2>
             <p className="text-gray-300 mb-6">
-              With over three decades of experience in gold crafting, 
-              Persian Gold Qatar brings you the finest expression of Persian 
-              artistry and craftsmanship. Our dedication to quality and 
-              tradition has made us a symbol of excellence in Qatar.
+              With over three decades of experience in gold crafting,
+              Persian Gold brings you the finest expression of Persian
+              artistry and craftsmanship. Our dedication to quality and
+              tradition has made us a symbol of excellence.
             </p>
             <Link href="/about" className="btn-primary inline-block">
               Learn More
@@ -134,12 +134,12 @@ export default function Home() {
         <div className="max-w-3xl mx-auto text-center">
           <h2 className="section-title">Visit Our Showroom</h2>
           <p className="text-gray-300 mb-8">
-            Experience the beauty and craftsmanship of Persian gold in person. 
+            Experience the beauty and craftsmanship of Persian gold in person.
             Our experts are ready to guide you through our heritage.
           </p>
-          <Link href="/contact" className="btn-primary">
+          {/* <Link href="/contact" className="btn-primary">
             Contact Us
-          </Link>
+          </Link> */}
         </div>
       </section>
 
@@ -149,26 +149,39 @@ export default function Home() {
           <div>
             <h3 className="text-[#D4AF37] font-bold text-xl mb-4">Persian Gold</h3>
             <p className="text-gray-400">
-              Bringing Persian excellence and artistry to Qatar.
+              Bringing Persian excellence and artistry.
             </p>
           </div>
+
           <div>
-            <h4 className="text-[#D4AF37] font-semibold mb-4">Contact</h4>
+            <h3 className="text-[#D4AF37] font-semibold mb-4">Contact - Qatar</h3>
             <ul className="space-y-2 text-gray-400">
-              <li>Pearl Qatar, Doha</li>
-              <li>Phone: +974 XXXX XXXX</li>
+              <li>Grand Mall, Doha</li>
+              <li>Phone: +974 7797 9916</li>
               <li>Email: info@persiangold.qa</li>
             </ul>
           </div>
+
           <div>
-            <h4 className="text-[#D4AF37] font-semibold mb-4">Business Hours</h4>
+            <h3 className="text-[#D4AF37] font-semibold mb-4">Contact - Dubai</h3>
+            <ul className="space-y-2 text-gray-400">
+              <li>Gold Souk</li>
+              <li>Jebel Ali</li>
+              <li>Sonapur</li>
+              <li>Phone: +971 55 185 5916</li>
+              <li>Email: dubai@persiangold.qa</li> {/* Optional, if you have a Dubai-specific email */}
+            </ul>
+          </div>
+
+          {/* <div>
+            <h3 className="text-[#D4AF37] font-semibold mb-4">Business Hours</h3>
             <ul className="space-y-2 text-gray-400">
               <li>Mon - Sat: 10:00 - 22:00</li>
               <li>Sunday: 14:00 - 20:00</li>
             </ul>
-          </div>
-        </div>
-      </footer>
-    </main>
+          </div> */}
+      </div>
+    </footer>
+    </main >
   );
 }

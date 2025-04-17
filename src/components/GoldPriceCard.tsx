@@ -20,7 +20,6 @@ const currencyOptions: CurrencyOption[] = [
   { label: 'AED', value: 'AED', symbol: 'AED', rate: 3.67 }, // 1 USD = 3.67 AED
 ];
 
-const API_KEY = '8e056a19983d0ed7f05febbfcc2e01d1';
 const API_BASE_URL = 'https://api.metalpriceapi.com/v1';
 
 export default function GoldPriceCard() {
@@ -28,71 +27,88 @@ export default function GoldPriceCard() {
   const [goldPrices, setGoldPrices] = useState<GoldPrices>({ '22k': 0, '24k': 0 });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [lastUpdated, setLastUpdated] = useState<string>('');
+
+  const fetchGoldPrice = async () => {
+    try {
+      setLoading(true);
+      setError('');
+
+      if (!process.env.NEXT_PUBLIC_METALPRICE_API_KEY) {
+        throw new Error('API key not configured');
+      }
+
+      const response = await fetch(
+        `${API_BASE_URL}/latest?api_key=${process.env.NEXT_PUBLIC_METALPRICE_API_KEY}&base=USD&currencies=XAU`,
+        {
+          method: 'GET',
+          headers: {
+            'Accept': 'application/json',
+          },
+        }
+      );
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error('API Error Response:', errorText);
+        throw new Error(`API Error: ${response.status} ${response.statusText}`);
+      }
+
+      const data = await response.json();
+      console.log('API Response:', data);
+
+      if (!data.rates || !data.rates.XAU) {
+        console.error('Invalid API Response Format:', data);
+        throw new Error('Invalid data format from API');
+      }
+
+      // Calculate prices
+      const gramsPerOunce = 31.1035;
+      const usdPerOunce = 1 / data.rates.XAU;
+      const usdPerGram = usdPerOunce / gramsPerOunce;
+
+      const prices = {
+        '24k': usdPerGram * selectedCurrency.rate,
+        '22k': (usdPerGram * 22/24) * selectedCurrency.rate,
+      };
+
+      console.log('Calculated Prices:', {
+        xauRate: data.rates.XAU,
+        usdPerOunce,
+        usdPerGram,
+        prices,
+        selectedCurrency
+      });
+
+      setGoldPrices(prices);
+      // Format the time in a consistent way
+      const now = new Date();
+      setLastUpdated(now.toLocaleTimeString('en-US', { 
+        hour: '2-digit', 
+        minute: '2-digit',
+        hour12: true 
+      }));
+    } catch (err) {
+      console.error('Error details:', err);
+      setError(err instanceof Error ? err.message : 'Failed to fetch gold prices');
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
-    const fetchGoldPrice = async () => {
-      try {
-        setLoading(true);
-        setError('');
-
-        const response = await fetch(
-          `${API_BASE_URL}/latest?api_key=${API_KEY}&base=USD&currencies=XAU`,
-          {
-            method: 'GET',
-            headers: {
-              'Accept': 'application/json',
-            },
-          }
-        );
-
-        if (!response.ok) {
-          const errorText = await response.text();
-          console.error('API Error Response:', errorText);
-          throw new Error(`API Error: ${response.status} ${response.statusText}`);
-        }
-
-        const data = await response.json();
-        console.log('API Response:', data);
-
-        if (!data.rates || !data.rates.XAU) {
-          console.error('Invalid API Response Format:', data);
-          throw new Error('Invalid data format from API');
-        }
-
-        // Calculate prices
-        // XAU rate gives us the price of 1 USD in gold ounces
-        // We need to convert this to USD per gram
-        const gramsPerOunce = 31.1035;
-        const usdPerOunce = 1 / data.rates.XAU;
-        const usdPerGram = usdPerOunce / gramsPerOunce;
-
-        const prices = {
-          '24k': usdPerGram * selectedCurrency.rate,
-          '22k': (usdPerGram * 22/24) * selectedCurrency.rate,
-        };
-
-        console.log('Calculated Prices:', {
-          xauRate: data.rates.XAU,
-          usdPerOunce,
-          usdPerGram,
-          prices,
-          selectedCurrency
-        });
-
-        setGoldPrices(prices);
-      } catch (err) {
-        console.error('Error details:', err);
-        setError(err instanceof Error ? err.message : 'Failed to fetch gold prices');
-      } finally {
-        setLoading(false);
-      }
-    };
-
     fetchGoldPrice();
-    const interval = setInterval(fetchGoldPrice, 60000); // Update every minute
-
-    return () => clearInterval(interval);
   }, [selectedCurrency]);
+
+  // Client-side only time display
+  useEffect(() => {
+    const now = new Date();
+    setLastUpdated(now.toLocaleTimeString('en-US', { 
+      hour: '2-digit', 
+      minute: '2-digit',
+      hour12: true 
+    }));
+  }, []);
 
   return (
     <div className="bg-black/40 backdrop-blur-sm border border-[#D4AF37]/20 rounded-lg p-6 max-w-sm w-full">
@@ -119,7 +135,7 @@ export default function GoldPriceCard() {
         <div className="text-red-400 text-center py-4">
           {error}
           <button 
-            onClick={() => setError('')} 
+            onClick={fetchGoldPrice} 
             className="block mx-auto mt-2 text-sm text-[#D4AF37] hover:text-[#FFD700]"
           >
             Try Again
@@ -143,7 +159,7 @@ export default function GoldPriceCard() {
       )}
       
       <div className="mt-4 text-xs text-gray-400 text-center">
-        Prices update every minute
+        {lastUpdated && `Last updated: ${lastUpdated}`}
       </div>
     </div>
   );
