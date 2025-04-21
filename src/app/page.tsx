@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import GoldPriceCard from "@/components/GoldPriceCard";
+import CallButton from "@/components/ContactButtton";
 
 export default function Home() {
   return (
@@ -20,11 +21,11 @@ export default function Home() {
             priority
           />
         </div>
-        <div className="absolute inset-0 bg-black/60 z-10"></div>
+        <div className="absolute inset-0 bg-black/0 z-10"></div>
         <div className="relative z-20 w-full h-full flex items-center">
           <div className="max-w-7xl mx-auto px-4 w-full">
             <div className="flex flex-col md:flex-row items-center gap-8">
-              <div className="hidden md:block flex-1 relative h-[850px] w-full md:w-[750px] order-2 md:order-1">
+              {/* <div className="hidden md:block flex-1 relative h-[850px] w-full md:w-[750px] order-2 md:order-1">
                 <Image
                   src="/images/hero.png"
                   alt="Elegant woman wearing Persian gold jewelry"
@@ -33,7 +34,7 @@ export default function Home() {
                   className="object-contain object-bottom"
                   priority
                 />
-              </div>
+              </div> */}
               <div className="flex-1 text-left order-1 md:order-2 md:self-center">
                 <h1 className="text-4xl md:text-6xl font-bold mb-6 text-[#D4AF37]">
                   Persian Gold Excellence
@@ -137,9 +138,7 @@ export default function Home() {
             Experience the beauty and craftsmanship of Persian gold in person.
             Our experts are ready to guide you through our heritage.
           </p>
-          {/* <Link href="/contact" className="btn-primary">
-            Contact Us
-          </Link> */}
+          <CallButton />
         </div>
       </section>
 
